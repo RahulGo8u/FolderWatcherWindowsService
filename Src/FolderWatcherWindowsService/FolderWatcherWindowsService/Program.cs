@@ -14,12 +14,17 @@ namespace FolderWatcherWindowsService
         /// </summary>
         static void Main()
         {
+#if (!DEBUG)
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
                 new Service1()
             };
             ServiceBase.Run(ServicesToRun);
+#else
+            var service = new Service1();
+            service.RunOnDebugMode();
+#endif
         }
     }
 }
